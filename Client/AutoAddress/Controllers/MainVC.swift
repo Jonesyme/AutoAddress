@@ -8,6 +8,7 @@
 
 import UIKit
 import Foundation
+import GoogleMaps
 
 enum LocationBar: Int {
     case From = 1
@@ -18,8 +19,10 @@ class MainVC: UIViewController {
     
     @IBOutlet var searchBarFrom: UISearchBar!
     @IBOutlet var searchBarTo: UISearchBar!
+    @IBOutlet var mapBox: UIImageView!
     
     var selectedBar = LocationBar.From
+    var mapView: GMSMapView?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +34,35 @@ class MainVC: UIViewController {
         searchBarTo.tag = LocationBar.To.rawValue
         searchBarTo.delegate = self
         searchBarTo.barStyle = .black
+        
+        // Create a GMSCameraPosition that tells the map to display the
+        // coordinate -33.86,151.20 at zoom level 6.
+        let camera = GMSCameraPosition.camera(withLatitude: -33.86, longitude: 151.20, zoom: 6.0)
+        mapView = GMSMapView.map(withFrame: mapBox.frame, camera: camera)
+        mapView?.isMyLocationEnabled = true
+        mapView?.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(mapView!)
+        
+        if let mapView = mapView {
+            NSLayoutConstraint.activate([
+                mapView.leftAnchor.constraint(equalTo: mapBox.leftAnchor),
+                mapView.topAnchor.constraint(equalTo: mapBox.topAnchor),
+                mapView.rightAnchor.constraint(equalTo: mapBox.rightAnchor),
+                mapView.bottomAnchor.constraint(equalTo: mapBox.bottomAnchor)
+            ])
+        }
+ 
+        // Creates a marker in the center of the map.
+        let marker = GMSMarker()
+        marker.position = CLLocationCoordinate2D(latitude: -33.86, longitude: 151.20)
+        marker.title = "Sydney"
+        marker.snippet = "Australia"
+        marker.map = mapView!
+        
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
     }
 }
 

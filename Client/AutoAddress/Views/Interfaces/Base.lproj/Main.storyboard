@@ -39,21 +39,32 @@
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </imageView>
-                            <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Choose Starting Location" showsSearchResultsButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TVS-Qe-LdY">
+                            <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Start" translatesAutoresizingMaskIntoConstraints="NO" id="TVS-Qe-LdY">
                                 <rect key="frame" x="0.0" y="28" width="375" height="56"/>
                                 <textInputTraits key="textInputTraits" keyboardType="alphabet" returnKeyType="go"/>
                             </searchBar>
-                            <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Choose Destination" showsSearchResultsButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="THq-gh-yRU">
+                            <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Destination" translatesAutoresizingMaskIntoConstraints="NO" id="THq-gh-yRU">
                                 <rect key="frame" x="0.0" y="84" width="375" height="56"/>
                                 <textInputTraits key="textInputTraits" keyboardType="alphabet" returnKeyType="go"/>
+                                <scopeButtonTitles>
+                                    <string>Title</string>
+                                    <string>Title</string>
+                                </scopeButtonTitles>
                             </searchBar>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fUh-rs-ZQt">
+                                <rect key="frame" x="0.0" y="152" width="375" height="515"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="THq-gh-yRU" firstAttribute="top" secondItem="TVS-Qe-LdY" secondAttribute="bottom" id="15l-19-pMg"/>
+                            <constraint firstItem="fUh-rs-ZQt" firstAttribute="top" secondItem="THq-gh-yRU" secondAttribute="bottom" constant="12" id="4KP-zQ-AQ4"/>
+                            <constraint firstItem="fUh-rs-ZQt" firstAttribute="leading" secondItem="kEH-4f-Rf2" secondAttribute="leading" id="IHl-gj-6TD"/>
                             <constraint firstItem="THq-gh-yRU" firstAttribute="trailing" secondItem="kEH-4f-Rf2" secondAttribute="trailing" id="N0Z-kZ-rTJ"/>
                             <constraint firstAttribute="trailing" secondItem="kEH-4f-Rf2" secondAttribute="trailing" id="VBi-mM-zwq"/>
                             <constraint firstItem="TVS-Qe-LdY" firstAttribute="leading" secondItem="kEH-4f-Rf2" secondAttribute="leading" id="VcD-0c-YYE"/>
+                            <constraint firstItem="fUh-rs-ZQt" firstAttribute="trailing" secondItem="kEH-4f-Rf2" secondAttribute="trailing" id="VjD-WI-TUl"/>
+                            <constraint firstItem="fUh-rs-ZQt" firstAttribute="bottom" secondItem="kEH-4f-Rf2" secondAttribute="bottom" id="WVy-rA-ur1"/>
                             <constraint firstItem="kEH-4f-Rf2" firstAttribute="bottom" secondItem="m6L-vs-fWY" secondAttribute="bottom" id="aQ1-9A-RWQ"/>
                             <constraint firstItem="kEH-4f-Rf2" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="fsF-Qm-WrJ"/>
                             <constraint firstItem="TVS-Qe-LdY" firstAttribute="trailing" secondItem="kEH-4f-Rf2" secondAttribute="trailing" id="kf2-7K-6fB"/>
@@ -66,6 +77,7 @@
                     <navigationItem key="navigationItem" id="tMW-Fg-Lz4"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
+                        <outlet property="mapBox" destination="fUh-rs-ZQt" id="BFy-fv-wvx"/>
                         <outlet property="searchBarFrom" destination="TVS-Qe-LdY" id="GDP-5t-Ypl"/>
                         <outlet property="searchBarTo" destination="THq-gh-yRU" id="Gqo-j5-V7e"/>
                         <outlet property="searchDisplayController" destination="EzD-ph-y4I" id="Nnx-aq-K3l"/>
