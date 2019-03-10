@@ -9,34 +9,35 @@
 import UIKit
 import Foundation
 
-enum LocationType: Int {
+enum LocationBar: Int {
     case From = 1
     case To = 2
 }
 
 class MainVC: UIViewController {
     
-    @IBOutlet var searchBarTop: UISearchBar!
-    //@IBOutlet var searchBarBottom: UISearchBar!
+    @IBOutlet var searchBarFrom: UISearchBar!
+    @IBOutlet var searchBarTo: UISearchBar!
     
-    var selectingLocation = LocationType.From
+    var selectedBar = LocationBar.From
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        searchBarTop.tag = LocationType.From.rawValue
-        searchBarTop.delegate = self
-        
-        //searchBarBottom.tag = LocationType.To.rawValue
-        //searchBarBottom.delegate = self
-    }
 
+        searchBarFrom.tag = LocationBar.From.rawValue
+        searchBarFrom.delegate = self
+        searchBarFrom.barStyle = .black
+        
+        searchBarTo.tag = LocationBar.To.rawValue
+        searchBarTo.delegate = self
+        searchBarTo.barStyle = .black
+    }
 }
 
 extension MainVC: UISearchBarDelegate {
 
     public func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
-        selectingLocation = LocationType(rawValue: searchBar.tag) ?? LocationType.From
+        selectedBar = LocationBar(rawValue: searchBar.tag) ?? LocationBar.From
 
         let storyboard = UIStoryboard(name:"Main", bundle:nil)
         guard let searchVC = storyboard.instantiateViewController(withIdentifier:"SearchVC") as? SearchVC else {
@@ -51,6 +52,10 @@ extension MainVC: UISearchBarDelegate {
 extension MainVC: SearchPlacesDelegate {
     
     public func didSelectPlace(_ place:Place) {
-        searchBarTop.text = place.desc
+        if selectedBar.rawValue == searchBarFrom.tag {
+            searchBarFrom.text = place.desc
+        } else {
+            searchBarTo.text = place.desc
+        }
     }
 }

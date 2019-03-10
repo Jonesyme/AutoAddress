@@ -13,13 +13,16 @@ import UIKit
 enum WebServiceError : Error {
     case Connection
     case Parsing
+    case BadResponse
     case Unknown
     var description: String {
         switch self {
         case .Connection:
             return "Unable to connect"
         case .Parsing:
-            return "Failed to parse"
+            return "Failed to parse response"
+        case .BadResponse:
+            return "Bad API response"
         case .Unknown:
             return "Unknown error"
         }
@@ -30,50 +33,60 @@ enum WebServiceError : Error {
 protocol RemoteWebService {
     associatedtype X
     func asyncRecordSearch(searchText:String, completion:@escaping(_ response:[X]?, _ error:WebServiceError?) -> Void)
-    var recordsPerPage:Int { get }
 }
 
-//
-// Custom Places WebService
-//
+// custom DWS places web service
 class PlacesWS: RemoteWebService {
     
     let session:URLSession = URLSession.shared
-    internal var baseURL:String { return "http://www.dreamwaresys.com/api/address/" }
-    internal var recordsPerPage:Int { return 25 } // for use in future paginated version
-
-    // fetch data
-    func asyncRecordSearch(searchText:String, completion:@escaping(_ response:[Place]?, _ error:WebServiceError?) -> Void) {
+    let dwsCode:String = "J23RVFJR"
+    let baseURL:String = "http://www.dreamwaresys.com/api/address/"
+    
+    // async fetch API response
+    func asyncRecordSearch(searchText: String, completion: @escaping(_ response: [Place]?, _ error: WebServiceError?) -> Void) {
         
-        let urlstring = baseURL + "get_autocomp.php?code=J23RVFJR&str=" + searchText
+        let urlstring = baseURL + "get_autocomp.php?code=" + dwsCode + "&str=" + searchText
         guard let url = URL(string: urlstring) else {
             completion(nil, WebServiceError.Unknown)
             return
         }
+        
         let task = self.session.dataTask(with: url, completionHandler: { (data, response, error) in
-            
             if let error = error {
                 DispatchQueue.main.async {
-                    completion(nil, WebServiceError.Unknown)
+                    // network error
+                    completion(nil, WebServiceError.Connection)
                     print("WebServiceError: " + error.localizedDescription)
                 }
                 return
             }
             guard let response = response as? HTTPURLResponse, let data = data, response.statusCode == 200, response.mimeType == "application/json" else {
                 DispatchQueue.main.async {
-                    completion(nil, WebServiceError.Unknown)
+                    // bad response error
+                    completion(nil, WebServiceError.BadResponse)
                 }
                 return
             }
 
             do {
                 let responseObj = try JSONDecoder().decode(PlaceResponse.self, from:data)
+                if let apiError = responseObj.error {
+                    if !apiError.isEmpty {
+                        DispatchQueue.main.async {
+                            // response contained an API-specific error
+                            completion(nil, WebServiceError.BadResponse)
+                            print("API Response Error: " + apiError)
+                        }
+                    }
+                }
                 let list = responseObj.list
                 DispatchQueue.main.async {
+                    // success!
                     completion(list, nil)
                 }
             } catch {
                 DispatchQueue.main.async {
+                    // JSON parsing failure
                     completion(nil, WebServiceError.Parsing)
                 }
             }
