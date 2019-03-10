@@ -13,7 +13,7 @@ protocol SearchPlacesDelegate: AnyObject {
     func didSelectPlace(_ place: Place)
 }
 
-
+//MARK: - ViewController Lifecycle
 class SearchVC: UITableViewController {
 
     let placesAPI = PlacesWS()  // web service manager
@@ -24,7 +24,6 @@ class SearchVC: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //navigationController? = true
         
         searchCtrl.searchResultsUpdater = self
         searchCtrl.obscuresBackgroundDuringPresentation = false
@@ -40,12 +39,13 @@ class SearchVC: UITableViewController {
     override func viewDidAppear(_ animated: Bool) {
         searchCtrl.isActive = true
         searchCtrl.searchBar.delegate = self
+        super.viewDidAppear(animated)
     }
 }
 
+// MARK: - TableView Delegates
 extension SearchVC {
     
-    // MARK: - Table View
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -75,9 +75,11 @@ extension SearchVC {
     }
 }
 
+// MARK: - SearchBar Delegates
 extension SearchVC: UISearchBarDelegate {
+    
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        
+        navigationController?.popViewController(animated: true)
     }
     
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
@@ -85,7 +87,7 @@ extension SearchVC: UISearchBarDelegate {
     }
 }
     
-
+// MARK: - SearchResults Delegates
 extension SearchVC: UISearchResultsUpdating {
     
     func updateSearchResults(for searchController: UISearchController) {
