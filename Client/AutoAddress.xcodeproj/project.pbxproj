@@ -26,6 +26,7 @@
 		F7383E832235286D00DEA2EA /* GoogleMaps.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7383E7C2235282F00DEA2EA /* GoogleMaps.framework */; };
 		F7383E842235286D00DEA2EA /* GoogleMapsBase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7383E7D2235282F00DEA2EA /* GoogleMapsBase.framework */; };
 		F7383E852235286D00DEA2EA /* GoogleMapsCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7383E7B2235282F00DEA2EA /* GoogleMapsCore.framework */; };
+		F74EF0692237AE2400E406BD /* PlaceDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = F74EF0682237AE2400E406BD /* PlaceDetail.swift */; };
 		F751B53E2223C2B2002216EE /* AutoAddressTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F751B53D2223C2B2002216EE /* AutoAddressTests.swift */; };
 		F751B5572223C7BC002216EE /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F751B54A2223C7BC002216EE /* MainVC.swift */; };
 		F751B5582223C7BC002216EE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F751B54D2223C7BC002216EE /* LaunchScreen.storyboard */; };
@@ -68,6 +69,7 @@
 		F7383E7C2235282F00DEA2EA /* GoogleMaps.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleMaps.framework; path = AutoAddress/Frameworks/GoogleMaps.framework; sourceTree = "<group>"; };
 		F7383E7D2235282F00DEA2EA /* GoogleMapsBase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleMapsBase.framework; path = AutoAddress/Frameworks/GoogleMapsBase.framework; sourceTree = "<group>"; };
 		F7383E812235284300DEA2EA /* GoogleMaps.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = GoogleMaps.bundle; path = AutoAddress/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle; sourceTree = "<group>"; };
+		F74EF0682237AE2400E406BD /* PlaceDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceDetail.swift; sourceTree = "<group>"; };
 		F751B5252223C2B1002216EE /* AutoAddress.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AutoAddress.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F751B5392223C2B2002216EE /* AutoAddressTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AutoAddressTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F751B53D2223C2B2002216EE /* AutoAddressTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoAddressTests.swift; sourceTree = "<group>"; };
@@ -225,6 +227,7 @@
 			isa = PBXGroup;
 			children = (
 				F7F6DBA82231BCE50095E79C /* Place.swift */,
+				F74EF0682237AE2400E406BD /* PlaceDetail.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -353,6 +356,7 @@
 				F7F6DBA92231BCE50095E79C /* Place.swift in Sources */,
 				F7F6DBA422318CB40095E79C /* SearchCell.swift in Sources */,
 				F7F6DBA62231B8E60095E79C /* PlacesWS.swift in Sources */,
+				F74EF0692237AE2400E406BD /* PlaceDetail.swift in Sources */,
 				F751B55B2223C7BC002216EE /* AppDelegate.swift in Sources */,
 				F751B5572223C7BC002216EE /* MainVC.swift in Sources */,
 			);

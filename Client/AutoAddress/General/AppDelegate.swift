@@ -16,8 +16,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        // Google MapsKit
-        GMSServices.provideAPIKey("AIzaSyDibYktYM16v_waJkI3mgWIBYlRZNRYL90")
+        // Google MapKit
+        GMSServices.provideAPIKey("AIzaSyAtz3LleOHcVkNFXZwCB3KKZtlXroUk6_I")
+        
+        // global navigation bar style
+        UINavigationBar.appearance().barTintColor = UIColor.darkGray
         
         return true
     }

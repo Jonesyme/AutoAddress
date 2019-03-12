@@ -28,11 +28,13 @@ class SearchVC: UITableViewController {
         searchCtrl.searchResultsUpdater = self
         searchCtrl.obscuresBackgroundDuringPresentation = false
         searchCtrl.searchBar.placeholder = "Enter a location"
+        searchCtrl.searchBar.sizeToFit()
         
         navigationItem.hidesBackButton = true
         navigationItem.searchController = searchCtrl
         definesPresentationContext = true
-        
+
+        //navigationItem.titleView = searchCtrl.searchBar
         //tableView.tableHeaderView = searchCtrl.view
     }
     

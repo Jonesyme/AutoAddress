@@ -52,6 +52,15 @@ class MainVC: UIViewController {
             ])
         }
  
+       /* let place = GMSPlace()
+        
+        let marker = GMSMarker()
+        marker.position = CLLocationCoordinate2D(latitude: -33.86, longitude: 151.20)
+        marker.title = "Sydney"
+        marker.map = mapView!
+        
+        */
+        
         // Creates a marker in the center of the map.
         let marker = GMSMarker()
         marker.position = CLLocationCoordinate2D(latitude: -33.86, longitude: 151.20)
@@ -89,5 +98,27 @@ extension MainVC: SearchPlacesDelegate {
         } else {
             searchBarTo.text = place.desc
         }
+        
+        PlacesWS().fetchPlaceDetails(placeID: place.place_id, completion:{ (detail, error) in
+            guard let placeDetail = detail else {
+                return
+            }
+            // add marker to map
+            let marker = GMSMarker()
+            marker.position = CLLocationCoordinate2D(latitude: placeDetail.lat, longitude: placeDetail.lng)
+            marker.title = place.desc
+            marker.snippet = "Start"
+            marker.map = self.mapView!
+            
+            
+            // re-focus map
+            var bounds = GMSCoordinateBounds()
+            bounds = bounds.includingCoordinate(marker.position)
+            let update = GMSCameraUpdate.fit(bounds, withPadding: 60000)
+            self.mapView!.animate(with: update)
+            
+        })
+
+        
     }
 }
