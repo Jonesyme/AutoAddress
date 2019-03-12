@@ -1,11 +1,11 @@
 <?php
 //
-//  Google Places API - Place Search Relay
+//  Google Places API - Auto-Complete Address Relay
 //  Method: GET 
 //  Format: JSON
 //
 
-include_once('./library.php');
+include_once('../library.php');
 
 // Validate Session
 // Note: this is NOT secure enough for production environments.  In the interest of time, I limited security...
@@ -14,7 +14,7 @@ if($apiKey=="") // validate google key
 	die("Invalid API Key");
 if(!validateAPICode($_GET['code'])) // validate client key
 	die("Invalid DWS Key");
-
+	
 // input parameters (NOTE: pass-thru to google so no need to sanitize)
 $str = $_GET['str'];  // search string
 $opt = $_GET['opt'];  // options flag (optional)
@@ -27,9 +27,8 @@ if($opt=="test") // override query string (for testing)
 
 // generate request URL
 $type = "json";
-$url = "https://maps.googleapis.com/maps/api/place/findplacefromtext/".$type;
+$url = "https://maps.googleapis.com/maps/api/place/autocomplete/".$type;
 $url .= "?key=".$apiKey;
-$url .= "&inputtype=textquery"; // limited to textquery for now, no phone number search...
 $url .= "&input=".$str;
 
 // fetch google places results

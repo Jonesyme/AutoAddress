@@ -8,7 +8,7 @@ global $CONFIG;
 //
 // Google Places API Key
 //
-include_once('./secret/apikey.php');
+include_once('secret/apikey.php');
 
 //
 // fetch remote webpage or API endpoint
