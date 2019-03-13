@@ -34,6 +34,7 @@
 		F751B5592223C7BC002216EE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F751B54F2223C7BC002216EE /* Main.storyboard */; };
 		F751B55A2223C7BC002216EE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F751B5542223C7BC002216EE /* Assets.xcassets */; };
 		F751B55B2223C7BC002216EE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F751B5552223C7BC002216EE /* AppDelegate.swift */; };
+		F7E3AAA22239C0470092B203 /* SearchManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7E3AAA12239C0470092B203 /* SearchManager.swift */; };
 		F7F6DBA1223185830095E79C /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7F6DBA0223185830095E79C /* SearchVC.swift */; };
 		F7F6DBA422318CB40095E79C /* SearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7F6DBA322318CB40095E79C /* SearchCell.swift */; };
 		F7F6DBA62231B8E60095E79C /* PlacesWS.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7F6DBA52231B8E60095E79C /* PlacesWS.swift */; };
@@ -82,6 +83,7 @@
 		F751B5542223C7BC002216EE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F751B5552223C7BC002216EE /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F751B5562223C7BC002216EE /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F7E3AAA12239C0470092B203 /* SearchManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchManager.swift; sourceTree = "<group>"; };
 		F7F6DBA0223185830095E79C /* SearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVC.swift; sourceTree = "<group>"; };
 		F7F6DBA322318CB40095E79C /* SearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCell.swift; sourceTree = "<group>"; };
 		F7F6DBA52231B8E60095E79C /* PlacesWS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesWS.swift; sourceTree = "<group>"; };
@@ -193,6 +195,7 @@
 		F751B5492223C7BC002216EE /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				F7E3AAA12239C0470092B203 /* SearchManager.swift */,
 				F751B54A2223C7BC002216EE /* MainVC.swift */,
 				F7F6DBA0223185830095E79C /* SearchVC.swift */,
 			);
@@ -361,6 +364,7 @@
 				F7F6DBA62231B8E60095E79C /* PlacesWS.swift in Sources */,
 				F7381DBF2238E0A1001E179E /* Extentions.swift in Sources */,
 				F74EF0692237AE2400E406BD /* PlaceDetail.swift in Sources */,
+				F7E3AAA22239C0470092B203 /* SearchManager.swift in Sources */,
 				F751B55B2223C7BC002216EE /* AppDelegate.swift in Sources */,
 				F751B5572223C7BC002216EE /* MainVC.swift in Sources */,
 			);

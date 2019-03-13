@@ -37,8 +37,11 @@ class MainVC: UIViewController {
         super.viewDidLoad()
 
         searchBarFrom.tag = LocationBar.From.rawValue
+        searchBarFrom.textColor = .black
         searchBarFrom.delegate = self
+        
         searchBarTo.tag = LocationBar.To.rawValue
+        searchBarTo.textColor = .black
         searchBarTo.delegate = self
         
         // configure map viewport
@@ -52,11 +55,9 @@ class MainVC: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
-        searchBarFrom.textColor = .black
-        searchBarTo.textColor = .black
     }
 }
+
 
 // MARK: - Google Maps Helpers
 
@@ -107,7 +108,7 @@ extension MainVC: UISearchBarDelegate {
 
 // MARK: - SearchPlacesDelegate
 
-extension MainVC: SearchPlacesDelegate {
+extension MainVC: SearchModalDelegate {
     
     public func didSelectPlace(_ place:Place) {
         if selectedBar.rawValue == searchBarFrom.tag {

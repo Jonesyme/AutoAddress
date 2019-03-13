@@ -8,13 +8,15 @@
 
 import UIKit
 
-// MARK: - SearchPlacesDelegate
-//  delegate to communicate search selections back to main VC
-protocol SearchPlacesDelegate: AnyObject {
+// MARK: - SearchModalDelegate
+//          delegate to communicate user's address selection back to the parent viewcontroller
+protocol SearchModalDelegate: AnyObject {
     func didSelectPlace(_ place: Place)
 }
 
-//MARK: - Search View Controller
+//
+// MARK: - Search View Controller
+//          Functions like a modal view that is shared between the start/destination address boxes
 class SearchVC: UITableViewController {
     
     // MARK: class methods
@@ -23,41 +25,59 @@ class SearchVC: UITableViewController {
     }
     
     // MARK: member variables
-    let placesAPI = PlacesWS()  // web service manager
-    var placeList = [Place]()   // array of suggested autocompletions
-    var searchCtrl = UISearchController(searchResultsController: nil)
+    var searchResults = [Place]()
+    var searchManager = SearchManager()
+    var searchCtrlr = UISearchController(searchResultsController: nil)
     
-    weak var delegate: SearchPlacesDelegate?
+    weak var delegate: SearchModalDelegate?
     
     // MARK: view lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        searchCtrl.searchResultsUpdater = self
-        searchCtrl.obscuresBackgroundDuringPresentation = false
-        searchCtrl.searchBar.placeholder = "Enter a location"
-        searchCtrl.searchBar.sizeToFit()
+        searchManager.delegate = self
+        
+        searchCtrlr.searchResultsUpdater = self
+        searchCtrlr.obscuresBackgroundDuringPresentation = false
+        searchCtrlr.searchBar.placeholder = "Enter a location"
+        searchCtrlr.searchBar.sizeToFit()
         
         navigationItem.hidesBackButton = true
-        navigationItem.searchController = searchCtrl
+        navigationItem.searchController = searchCtrlr
         definesPresentationContext = true
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        
+        searchCtrlr.searchBar.textColor = .white
+        searchCtrlr.searchBar.tintColor = .darkGray
+        searchCtrlr.searchBar.barStyle = UIBarStyle.blackTranslucent
+        
+        searchCtrlr.isActive = true
+        searchCtrlr.searchBar.delegate = self
+        searchCtrlr.searchBar.becomeFirstResponder()
+        
         super.viewDidAppear(animated)
-        
-        // modify UISearchBar styles
-        searchCtrl.searchBar.textColor = .white
-        searchCtrl.searchBar.tintColor = .darkGray
-        searchCtrl.searchBar.barStyle = UIBarStyle.blackTranslucent
-        
-        searchCtrl.isActive = true
-        searchCtrl.searchBar.delegate = self
-        searchCtrl.searchBar.becomeFirstResponder()
+    }
+    
+}
+
+// MARK: - SearchManagerDelegate
+
+extension SearchVC: SearchManagerDelegate {
+    
+    func newSearchResultsAvailable(results: [Place]) {
+        self.searchResults = results
+        self.tableView.reloadData()
+    }
+    
+    func networkErrorOccured(desc: String) {
+        print("Error: network unavailable")
     }
 }
 
 // MARK: - TableView Delegates
+
 extension SearchVC {
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -65,7 +85,7 @@ extension SearchVC {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return placeList.count
+        return searchResults.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -74,15 +94,15 @@ extension SearchVC {
             return UITableViewCell()
         }
         
-        let title = placeList[indexPath.row].structured_main
-        let detail = placeList[indexPath.row].structured_second
+        let title = searchResults[indexPath.row].structured_main
+        let detail = searchResults[indexPath.row].structured_second
         cell.configureCellForDisplay(titleText:title, detailText:detail)
 
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let placeObj = placeList[indexPath.row]
+        let placeObj = searchResults[indexPath.row]
         tableView.deselectRow(at: indexPath, animated: false)
         delegate?.didSelectPlace(placeObj)
         navigationController?.popViewController(animated: true)
@@ -115,12 +135,7 @@ extension SearchVC: UISearchResultsUpdating {
             return
         }
         
-        placesAPI.asyncRecordSearch(searchText:text, completion:{ (list, error) in
-            self.placeList = list ?? Array();
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
-        })
-        //print(text)
+        searchManager.searchTextDidChange(text)
     }
 }
+
