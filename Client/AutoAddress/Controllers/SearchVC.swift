@@ -22,6 +22,11 @@ class SearchVC: UITableViewController {
     
     weak var delegate: SearchPlacesDelegate?
     
+    // MARK: - class methods
+    class var identifier: String {
+        return "searchVC"
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -57,7 +62,7 @@ extension SearchVC {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier:"searchCell", for: indexPath) as? SearchCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier:SearchCell.identifier, for: indexPath) as? SearchCell else {
             print("Error: unable to dequeue a SearchCell")
             return UITableViewCell()
         }

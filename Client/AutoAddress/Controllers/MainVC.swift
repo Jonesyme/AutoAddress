@@ -17,13 +17,14 @@ enum LocationBar: Int {
 
 class MainVC: UIViewController {
     
-    @IBOutlet var searchBarFrom: UISearchBar!
-    @IBOutlet var searchBarTo: UISearchBar!
-    @IBOutlet var mapBox: UIImageView!
+    @IBOutlet weak var searchOverlayView: UIView!
+    @IBOutlet weak var searchBarFrom: UISearchBar!
+    @IBOutlet weak var searchBarTo: UISearchBar!
+    @IBOutlet weak var mapView: GMSMapView!
     
+    var placeList = [PlaceDetail]()
     var selectedBar = LocationBar.From
-    var mapView: GMSMapView?
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -35,43 +36,39 @@ class MainVC: UIViewController {
         searchBarTo.delegate = self
         searchBarTo.barStyle = .black
         
-        // Create a GMSCameraPosition that tells the map to display the
-        // coordinate -33.86,151.20 at zoom level 6.
-        let camera = GMSCameraPosition.camera(withLatitude: -33.86, longitude: 151.20, zoom: 6.0)
-        mapView = GMSMapView.map(withFrame: mapBox.frame, camera: camera)
-        mapView?.isMyLocationEnabled = true
-        mapView?.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(mapView!)
-        
-        if let mapView = mapView {
-            NSLayoutConstraint.activate([
-                mapView.leftAnchor.constraint(equalTo: mapBox.leftAnchor),
-                mapView.topAnchor.constraint(equalTo: mapBox.topAnchor),
-                mapView.rightAnchor.constraint(equalTo: mapBox.rightAnchor),
-                mapView.bottomAnchor.constraint(equalTo: mapBox.bottomAnchor)
-            ])
-        }
- 
-       /* let place = GMSPlace()
-        
-        let marker = GMSMarker()
-        marker.position = CLLocationCoordinate2D(latitude: -33.86, longitude: 151.20)
-        marker.title = "Sydney"
-        marker.map = mapView!
-        
+        // configure map's camera or viewport
+        mapView.camera = GMSCameraPosition.camera(withLatitude: -33.86, longitude: 151.20, zoom: 6.0)
+        mapView.isMyLocationEnabled = true
+
+        /*
+            // creates a marker in the center of the map.
+            let marker = GMSMarker()
+            marker.position = CLLocationCoordinate2D(latitude: -33.86, longitude: 151.20)
+            marker.title = "Sydney"
+            marker.snippet = "Australia"
+            marker.map = mapView
         */
-        
-        // Creates a marker in the center of the map.
-        let marker = GMSMarker()
-        marker.position = CLLocationCoordinate2D(latitude: -33.86, longitude: 151.20)
-        marker.title = "Sydney"
-        marker.snippet = "Australia"
-        marker.map = mapView!
-        
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+    }
+    
+    // auto-zoom around all map markers
+    func autoZoomMap() {
+        var bounds = GMSCoordinateBounds()
+        for placeDetail in placeList {
+            // TODO: shouldn't we be storing/looping over the markers instead ??
+            let marker = GMSMarker()
+            marker.position = CLLocationCoordinate2D(latitude:placeDetail.lat, longitude:placeDetail.lng)
+            marker.map = self.mapView
+            bounds = bounds.includingCoordinate(marker.position)
+        }
+        
+        mapView.setMinZoom(1, maxZoom: 15) // hack to prevent over zoom and prep for animation
+        mapView.animate(with: GMSCameraUpdate.fit(bounds, withPadding: 50))
+        mapView.setMinZoom(1, maxZoom: 20) // hack to re-enable user's zoom controls
+        
     }
 }
 
@@ -81,7 +78,7 @@ extension MainVC: UISearchBarDelegate {
         selectedBar = LocationBar(rawValue: searchBar.tag) ?? LocationBar.From
 
         let storyboard = UIStoryboard(name:"Main", bundle:nil)
-        guard let searchVC = storyboard.instantiateViewController(withIdentifier:"SearchVC") as? SearchVC else {
+        guard let searchVC = storyboard.instantiateViewController(withIdentifier:"searchVC") as? SearchVC else {
             return false
         }
         searchVC.delegate = self
@@ -103,22 +100,17 @@ extension MainVC: SearchPlacesDelegate {
             guard let placeDetail = detail else {
                 return
             }
+            
             // add marker to map
             let marker = GMSMarker()
             marker.position = CLLocationCoordinate2D(latitude: placeDetail.lat, longitude: placeDetail.lng)
             marker.title = place.desc
             marker.snippet = "Start"
-            marker.map = self.mapView!
+            marker.map = self.mapView
             
-            
-            // re-focus map
-            var bounds = GMSCoordinateBounds()
-            bounds = bounds.includingCoordinate(marker.position)
-            let update = GMSCameraUpdate.fit(bounds, withPadding: 60000)
-            self.mapView!.animate(with: update)
-            
+            // TODO: this will never remove markers!
+            self.placeList.append(placeDetail)
+            self.autoZoomMap()
         })
-
-        
     }
 }

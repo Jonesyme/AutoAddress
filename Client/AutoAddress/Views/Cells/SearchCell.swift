@@ -13,6 +13,12 @@ class SearchCell: UITableViewCell {
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var detailLabel: UILabel!
 
+    // MARK: - class methods
+    class var identifier: String {
+        return NSStringFromClass(self).components(separatedBy: ".").last ?? "cellIdentifier"
+    }
+    
+    // MARK: - member functions
     override func prepareForReuse() {
         super.prepareForReuse()
     }
