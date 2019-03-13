@@ -8,25 +8,28 @@
 
 import UIKit
 
-// delegate to communicate search selections back to main VC
+// MARK: - SearchPlacesDelegate
+//  delegate to communicate search selections back to main VC
 protocol SearchPlacesDelegate: AnyObject {
     func didSelectPlace(_ place: Place)
 }
 
-//MARK: - ViewController Lifecycle
+//MARK: - Search View Controller
 class SearchVC: UITableViewController {
-
+    
+    // MARK: class methods
+    class var storyboardID: String {
+        return "searchVC"
+    }
+    
+    // MARK: member variables
     let placesAPI = PlacesWS()  // web service manager
     var placeList = [Place]()   // array of suggested autocompletions
     var searchCtrl = UISearchController(searchResultsController: nil)
     
     weak var delegate: SearchPlacesDelegate?
     
-    // MARK: - class methods
-    class var identifier: String {
-        return "searchVC"
-    }
-    
+    // MARK: view lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -38,15 +41,19 @@ class SearchVC: UITableViewController {
         navigationItem.hidesBackButton = true
         navigationItem.searchController = searchCtrl
         definesPresentationContext = true
-
-        //navigationItem.titleView = searchCtrl.searchBar
-        //tableView.tableHeaderView = searchCtrl.view
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        // modify UISearchBar styles
+        searchCtrl.searchBar.textColor = .white
+        searchCtrl.searchBar.tintColor = .darkGray
+        searchCtrl.searchBar.barStyle = UIBarStyle.blackTranslucent
+        
         searchCtrl.isActive = true
         searchCtrl.searchBar.delegate = self
-        super.viewDidAppear(animated)
+        searchCtrl.searchBar.becomeFirstResponder()
     }
 }
 
@@ -82,8 +89,13 @@ extension SearchVC {
     }
 }
 
-// MARK: - SearchBar Delegates
+// MARK: - UISearchBarDelegate
+
 extension SearchVC: UISearchBarDelegate {
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+    }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         navigationController?.popViewController(animated: true)
@@ -94,7 +106,8 @@ extension SearchVC: UISearchBarDelegate {
     }
 }
     
-// MARK: - SearchResults Delegates
+// MARK: - UISearchResultsUpdating
+
 extension SearchVC: UISearchResultsUpdating {
     
     func updateSearchResults(for searchController: UISearchController) {
@@ -108,9 +121,6 @@ extension SearchVC: UISearchResultsUpdating {
                 self.tableView.reloadData()
             }
         })
-        
-        print(text)
+        //print(text)
     }
-    
 }
-

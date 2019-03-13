@@ -21,6 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // global navigation bar style
         UINavigationBar.appearance().barTintColor = UIColor.darkGray
+        UISearchBar.appearance().tintColor = .green
         
         return true
     }

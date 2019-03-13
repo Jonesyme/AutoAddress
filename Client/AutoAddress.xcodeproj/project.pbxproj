@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F7381DBF2238E0A1001E179E /* Extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7381DBE2238E0A1001E179E /* Extentions.swift */; };
 		F7383E662235273700DEA2EA /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7383E572235273700DEA2EA /* CoreTelephony.framework */; };
 		F7383E672235273700DEA2EA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7383E582235273700DEA2EA /* UIKit.framework */; };
 		F7383E682235273700DEA2EA /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7383E592235273700DEA2EA /* CoreText.framework */; };
@@ -50,6 +51,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F7381DBE2238E0A1001E179E /* Extentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extentions.swift; sourceTree = "<group>"; };
 		F7383E572235273700DEA2EA /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		F7383E582235273700DEA2EA /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		F7383E592235273700DEA2EA /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
@@ -235,8 +237,9 @@
 		F751B5532223C7BC002216EE /* General */ = {
 			isa = PBXGroup;
 			children = (
-				F751B5542223C7BC002216EE /* Assets.xcassets */,
 				F751B5552223C7BC002216EE /* AppDelegate.swift */,
+				F751B5542223C7BC002216EE /* Assets.xcassets */,
+				F7381DBE2238E0A1001E179E /* Extentions.swift */,
 				F751B5562223C7BC002216EE /* Info.plist */,
 			);
 			path = General;
@@ -356,6 +359,7 @@
 				F7F6DBA92231BCE50095E79C /* Place.swift in Sources */,
 				F7F6DBA422318CB40095E79C /* SearchCell.swift in Sources */,
 				F7F6DBA62231B8E60095E79C /* PlacesWS.swift in Sources */,
+				F7381DBF2238E0A1001E179E /* Extentions.swift in Sources */,
 				F74EF0692237AE2400E406BD /* PlaceDetail.swift in Sources */,
 				F751B55B2223C7BC002216EE /* AppDelegate.swift in Sources */,
 				F751B5572223C7BC002216EE /* MainVC.swift in Sources */,

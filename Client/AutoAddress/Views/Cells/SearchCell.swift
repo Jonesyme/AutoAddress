@@ -10,6 +10,8 @@ import UIKit
 
 class SearchCell: UITableViewCell {
 
+    // MARK: - Nib Outlets
+
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var detailLabel: UILabel!
 
