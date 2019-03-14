@@ -29,7 +29,7 @@ if($opt=="test") // override query string (for testing)
 $type = "json";
 $url = "https://maps.googleapis.com/maps/api/place/autocomplete/".$type;
 $url .= "?key=".$apiKey;
-$url .= "&input=".$str;
+$url .= "&input=".urlencode($str);
 
 // fetch google places results
 $response = fetchRemoteWebpage($url);
