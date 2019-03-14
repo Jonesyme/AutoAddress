@@ -87,6 +87,21 @@ extension MainVC: CLLocationManagerDelegate {
         self.mapView.animate(to: camera)
         self.locationManager.stopUpdatingLocation() // cease updating location
     }
+    
+    func addMarkerForPlace(_ place: Place, detailResponse:PlaceDetailResponse) {
+        let placeDetail = detailResponse.data
+        
+        // add marker to map
+        let marker = GMSMarker()
+        marker.position = CLLocationCoordinate2D(latitude: placeDetail.lat, longitude: placeDetail.lng)
+        marker.title = place.desc
+        marker.snippet = "Start"
+        marker.map = self.mapView
+        
+        // TODO: this will never remove markers!
+        self.placeList.append(placeDetail)
+        self.autoSizeMapViewport()
+    }
 }
 
 // MARK: - UISearchBarDelegate
@@ -117,21 +132,17 @@ extension MainVC: SearchModalDelegate {
             searchBarTo.text = place.desc
         }
         
-        PlacesWS().fetchPlaceDetails(placeID: place.place_id, completion:{ (detail, error) in
-            guard let placeDetail = detail else {
-                return
+        APIClient.shared().get(DWSEndpoint.details(placeID: place.place_id), responseType: PlaceDetailResponse.self) { result in
+            switch result {
+            case .error(let error):
+                DispatchQueue.main.async {
+                    print("Error fetching place details from API: " + error.localizedDescription)
+                }
+            case .result(let detailResponse):
+                DispatchQueue.main.async {
+                    self.addMarkerForPlace(place, detailResponse: detailResponse)
+                }
             }
-            
-            // add marker to map
-            let marker = GMSMarker()
-            marker.position = CLLocationCoordinate2D(latitude: placeDetail.lat, longitude: placeDetail.lng)
-            marker.title = place.desc
-            marker.snippet = "Start"
-            marker.map = self.mapView
-            
-            // TODO: this will never remove markers!
-            self.placeList.append(placeDetail)
-            self.autoSizeMapViewport()
-        })
+        }
     }
 }

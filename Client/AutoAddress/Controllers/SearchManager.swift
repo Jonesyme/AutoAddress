@@ -23,17 +23,14 @@ protocol SearchManagerDelegate: AnyObject {
 //
 class SearchManager {
     
-    internal let placesAPI: PlacesWS = PlacesWS()  // web service manager
     internal var resultList = [Place]()
-    
-    internal var fetchInProgress: Bool = false
-    internal var nextSearchText: String = ""
-    internal var currSearchText: String = ""
+    internal var fetchInProgress: Bool
+    internal var nextSearchText: String
+    internal var currSearchText: String
     
     weak var delegate: SearchManagerDelegate?
     
     init() {
-        
         fetchInProgress = false
         nextSearchText = ""
         currSearchText = ""
@@ -54,20 +51,20 @@ class SearchManager {
         fetchInProgress = true
         currSearchText = text
         
-        // perform async search
-        placesAPI.asyncRecordSearch(searchText:text, completion:{ (list, error) in
-            if let error = error {
+        APIClient.shared().get(DWSEndpoint.search(text: text), responseType: PlaceResponse.self) { result in
+            switch result {
+            case .error(let error):
                 DispatchQueue.main.async {
-                    self.delegate?.networkErrorOccured(desc: error.description)
+                    self.delegate?.networkErrorOccured(desc: error.localizedDescription)
                 }
-            } else {
-                self.resultList = list ?? Array();
+            case .result(let placeResponse):
+                self.resultList = placeResponse.list
                 DispatchQueue.main.async {
                     self.delegate?.newSearchResultsAvailable(results: self.resultList)
                 }
             }
             self.fetchInProgress = false
-        })
+        }
     }
     
 }

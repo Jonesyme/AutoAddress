@@ -35,9 +35,10 @@
 		F751B55A2223C7BC002216EE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F751B5542223C7BC002216EE /* Assets.xcassets */; };
 		F751B55B2223C7BC002216EE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F751B5552223C7BC002216EE /* AppDelegate.swift */; };
 		F7E3AAA22239C0470092B203 /* SearchManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7E3AAA12239C0470092B203 /* SearchManager.swift */; };
+		F7E3AAA62239CFEF0092B203 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7E3AAA42239CFEF0092B203 /* APIClient.swift */; };
+		F7E3AAA72239CFEF0092B203 /* DWSEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7E3AAA52239CFEF0092B203 /* DWSEndpoint.swift */; };
 		F7F6DBA1223185830095E79C /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7F6DBA0223185830095E79C /* SearchVC.swift */; };
 		F7F6DBA422318CB40095E79C /* SearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7F6DBA322318CB40095E79C /* SearchCell.swift */; };
-		F7F6DBA62231B8E60095E79C /* PlacesWS.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7F6DBA52231B8E60095E79C /* PlacesWS.swift */; };
 		F7F6DBA92231BCE50095E79C /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7F6DBA82231BCE50095E79C /* Place.swift */; };
 /* End PBXBuildFile section */
 
@@ -84,9 +85,10 @@
 		F751B5552223C7BC002216EE /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F751B5562223C7BC002216EE /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F7E3AAA12239C0470092B203 /* SearchManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchManager.swift; sourceTree = "<group>"; };
+		F7E3AAA42239CFEF0092B203 /* APIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
+		F7E3AAA52239CFEF0092B203 /* DWSEndpoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DWSEndpoint.swift; sourceTree = "<group>"; };
 		F7F6DBA0223185830095E79C /* SearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVC.swift; sourceTree = "<group>"; };
 		F7F6DBA322318CB40095E79C /* SearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCell.swift; sourceTree = "<group>"; };
-		F7F6DBA52231B8E60095E79C /* PlacesWS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesWS.swift; sourceTree = "<group>"; };
 		F7F6DBA82231BCE50095E79C /* Place.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -175,10 +177,10 @@
 			isa = PBXGroup;
 			children = (
 				F751B5532223C7BC002216EE /* General */,
-				F751B5522223C7BC002216EE /* Models */,
 				F751B5492223C7BC002216EE /* Controllers */,
+				F751B5522223C7BC002216EE /* Models */,
+				F7E3AAA32239CFEF0092B203 /* Network */,
 				F751B54B2223C7BC002216EE /* Views */,
-				F751B5512223C7BC002216EE /* WebServices */,
 			);
 			path = AutoAddress;
 			sourceTree = "<group>";
@@ -220,14 +222,6 @@
 			path = Interfaces;
 			sourceTree = "<group>";
 		};
-		F751B5512223C7BC002216EE /* WebServices */ = {
-			isa = PBXGroup;
-			children = (
-				F7F6DBA52231B8E60095E79C /* PlacesWS.swift */,
-			);
-			path = WebServices;
-			sourceTree = "<group>";
-		};
 		F751B5522223C7BC002216EE /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -246,6 +240,15 @@
 				F751B5562223C7BC002216EE /* Info.plist */,
 			);
 			path = General;
+			sourceTree = "<group>";
+		};
+		F7E3AAA32239CFEF0092B203 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				F7E3AAA42239CFEF0092B203 /* APIClient.swift */,
+				F7E3AAA52239CFEF0092B203 /* DWSEndpoint.swift */,
+			);
+			path = Network;
 			sourceTree = "<group>";
 		};
 		F7F6DBA222318C870095E79C /* Cells */ = {
@@ -361,7 +364,8 @@
 				F7F6DBA1223185830095E79C /* SearchVC.swift in Sources */,
 				F7F6DBA92231BCE50095E79C /* Place.swift in Sources */,
 				F7F6DBA422318CB40095E79C /* SearchCell.swift in Sources */,
-				F7F6DBA62231B8E60095E79C /* PlacesWS.swift in Sources */,
+				F7E3AAA62239CFEF0092B203 /* APIClient.swift in Sources */,
+				F7E3AAA72239CFEF0092B203 /* DWSEndpoint.swift in Sources */,
 				F7381DBF2238E0A1001E179E /* Extentions.swift in Sources */,
 				F74EF0692237AE2400E406BD /* PlaceDetail.swift in Sources */,
 				F7E3AAA22239C0470092B203 /* SearchManager.swift in Sources */,
