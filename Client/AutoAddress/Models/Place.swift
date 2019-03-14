@@ -10,7 +10,7 @@ import Foundation
 
 // codable places API response
 struct PlaceResponse: Codable {
-    var status: String
+    var status: String?
     var error: String?
     var list: [Place]
 }

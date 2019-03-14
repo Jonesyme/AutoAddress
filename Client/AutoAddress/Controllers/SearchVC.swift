@@ -72,7 +72,7 @@ extension SearchVC: SearchManagerDelegate {
     }
     
     func networkErrorOccured(desc: String) {
-        print("Error: network unavailable")
+        print("Error: network unavailable: " + desc)
     }
 }
 
