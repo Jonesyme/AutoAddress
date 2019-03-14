@@ -57,7 +57,7 @@ final public class APIClient {
     }()
 }
 
-// MARK: - Giphy API Client
+// MARK: - DWS API Client
 extension APIClient {
     
     internal func generateURL(_ endpoint: DWSEndpoint) -> URL? {
