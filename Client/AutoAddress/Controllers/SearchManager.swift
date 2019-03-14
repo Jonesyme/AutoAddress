@@ -59,8 +59,15 @@ class SearchManager {
                 self.resultList = placeResponse.list
                 self.delegate?.newSearchResultsAvailable(results: self.resultList)
             }
-            self.fetchInProgress = false
+            self.searchCompletionCallback()
         }
     }
     
+    private func searchCompletionCallback() {
+        self.fetchInProgress = false
+        // if our search text has changed since our last request, begin new search
+        if nextSearchText != currSearchText {
+            executeNewFetch(nextSearchText)
+        }
+    }
 }
