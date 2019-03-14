@@ -25,9 +25,11 @@ class SearchVC: UITableViewController {
     }
     
     // MARK: member variables
-    var searchResults = [Place]()
-    var searchManager = SearchManager()
-    var searchCtrlr = UISearchController(searchResultsController: nil)
+    internal var searchResults = [Place]()
+    internal var searchManager = SearchManager()
+    internal var searchCtrlr = UISearchController(searchResultsController: nil)
+    internal var flagNetworkError:Bool = false
+    internal var flagNoResults:Bool = false
     
     weak var delegate: SearchModalDelegate?
     
@@ -59,7 +61,6 @@ class SearchVC: UITableViewController {
         
         super.viewDidAppear(animated)
     }
-    
 }
 
 // MARK: - SearchManagerDelegate
@@ -68,10 +69,15 @@ extension SearchVC: SearchManagerDelegate {
     
     func newSearchResultsAvailable(results: [Place]) {
         self.searchResults = results
+        self.flagNoResults = (results.count == 0)
+        self.flagNetworkError = false
         self.tableView.reloadData()
     }
     
     func networkErrorOccured(desc: String) {
+        self.flagNoResults = false
+        self.flagNetworkError = true
+        self.tableView.reloadData()
         print("Error: network unavailable: " + desc)
     }
 }
@@ -81,30 +87,62 @@ extension SearchVC: SearchManagerDelegate {
 extension SearchVC {
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return 3
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.section == 0 || indexPath.section == 1 {
+            return 100
+        }
+        return 50
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return searchResults.count
+        if section == 0 { // network error cell
+            if flagNetworkError {
+                return 1
+            } else {
+                return 0
+            }
+        } else if section == 1 { // empty result cell
+            if flagNoResults {
+                return 1
+            } else {
+                return 0
+            }
+        } else if section == 2 { // recommended location cells
+            return searchResults.count
+        }
+        return 0
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier:SearchCell.identifier, for: indexPath) as? SearchCell else {
-            print("Error: unable to dequeue a SearchCell")
-            return UITableViewCell()
-        }
-        
-        let title = searchResults[indexPath.row].structured_main
-        let detail = searchResults[indexPath.row].structured_second
-        cell.configureCellForDisplay(titleText:title, detailText:detail)
+        if indexPath.section == 0 {
+            // error message cell
+            let cell = tableView.dequeueReusableCell(withIdentifier:"errorCell", for: indexPath)
+            return cell
+        } else if indexPath.section == 1 {
+            // empty result cell
+            let cell = tableView.dequeueReusableCell(withIdentifier:"noResults", for: indexPath)
+            return cell
+        } else {
+            // recommended location cells
+            guard let cell = tableView.dequeueReusableCell(withIdentifier:SearchCell.identifier, for: indexPath) as? SearchCell else {
+                print("Error: unable to dequeue a SearchCell")
+                return UITableViewCell()
+            }
+            let title = searchResults[indexPath.row].structured_main
+            let detail = searchResults[indexPath.row].structured_second
+            cell.configureCellForDisplay(titleText:title, detailText:detail)
 
-        return cell
+            return cell
+        }
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let placeObj = searchResults[indexPath.row]
+        let place = searchResults[indexPath.row]
         tableView.deselectRow(at: indexPath, animated: false)
-        delegate?.didSelectPlace(placeObj)
+        delegate?.didSelectPlace(place)
         navigationController?.popViewController(animated: true)
     }
 }
@@ -134,7 +172,6 @@ extension SearchVC: UISearchResultsUpdating {
         guard let text = searchController.searchBar.text, text.count > 2 else {
             return
         }
-        
         searchManager.searchTextDidChange(text)
     }
 }

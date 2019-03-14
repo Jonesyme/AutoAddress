@@ -164,6 +164,67 @@
                                     <outlet property="titleLabel" destination="0GP-rf-DoQ" id="AGk-2Z-CWC"/>
                                 </connections>
                             </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="errorCell" rowHeight="100" id="sw9-Ss-iVp">
+                                <rect key="frame" x="0.0" y="72" width="375" height="100"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="sw9-Ss-iVp" id="OgT-Bk-vnJ">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="99.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Unable to connect to server" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Boj-rV-J9m">
+                                            <rect key="frame" x="107" y="0.0" width="212.5" height="100"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <imageView userInteractionEnabled="NO" alpha="0.59999999999999998" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="errorIcon" translatesAutoresizingMaskIntoConstraints="NO" id="tRU-Sa-5Bq">
+                                            <rect key="frame" x="27" y="29.5" width="41" height="41"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="41" id="7oS-Fa-TPC"/>
+                                                <constraint firstAttribute="width" constant="41" id="yYi-sX-vmj"/>
+                                            </constraints>
+                                        </imageView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="Boj-rV-J9m" firstAttribute="top" secondItem="OgT-Bk-vnJ" secondAttribute="top" id="LKp-1K-aCl"/>
+                                        <constraint firstAttribute="bottom" secondItem="Boj-rV-J9m" secondAttribute="bottom" constant="-0.5" id="PWG-l5-ynM"/>
+                                        <constraint firstItem="tRU-Sa-5Bq" firstAttribute="leading" secondItem="OgT-Bk-vnJ" secondAttribute="leading" constant="27" id="Xp8-tU-Xgo"/>
+                                        <constraint firstItem="Boj-rV-J9m" firstAttribute="leading" secondItem="tRU-Sa-5Bq" secondAttribute="trailing" constant="39" id="eBC-1P-i2s"/>
+                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Boj-rV-J9m" secondAttribute="trailing" constant="55.5" id="fwi-mw-7E4"/>
+                                        <constraint firstItem="tRU-Sa-5Bq" firstAttribute="centerY" secondItem="OgT-Bk-vnJ" secondAttribute="centerY" id="mBf-fG-fwv"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="noResults" rowHeight="100" id="5E8-e9-vXB">
+                                <rect key="frame" x="0.0" y="172" width="375" height="100"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="5E8-e9-vXB" id="F23-yc-FsA">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="99.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" alpha="0.5" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wahwah" translatesAutoresizingMaskIntoConstraints="NO" id="gxw-wS-4uU">
+                                            <rect key="frame" x="25" y="27.5" width="50" height="45"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="50" id="6ux-2g-ulj"/>
+                                                <constraint firstAttribute="height" constant="45" id="eHF-tC-rTz"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Matching Locations" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UUY-XQ-Rhj">
+                                            <rect key="frame" x="109" y="0.0" width="176" height="100"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="gxw-wS-4uU" firstAttribute="centerY" secondItem="F23-yc-FsA" secondAttribute="centerY" id="ClI-ZW-ErO"/>
+                                        <constraint firstItem="UUY-XQ-Rhj" firstAttribute="leading" secondItem="gxw-wS-4uU" secondAttribute="trailing" constant="34" id="TEU-Nq-AYf"/>
+                                        <constraint firstItem="gxw-wS-4uU" firstAttribute="leading" secondItem="F23-yc-FsA" secondAttribute="leading" constant="25" id="X38-tO-WJS"/>
+                                        <constraint firstItem="UUY-XQ-Rhj" firstAttribute="top" secondItem="F23-yc-FsA" secondAttribute="top" id="dbx-7d-Kxh"/>
+                                        <constraint firstAttribute="bottom" secondItem="UUY-XQ-Rhj" secondAttribute="bottom" constant="-0.5" id="jYk-BR-TD0"/>
+                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="UUY-XQ-Rhj" secondAttribute="trailing" constant="51" id="ug2-aY-No1"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                            </tableViewCell>
                         </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="zaz-BJ-ed3" id="Ydc-RX-FhX"/>
@@ -176,10 +237,12 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rbc-3b-oOR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="224.80000000000001" y="37.331334332833585"/>
+            <point key="canvasLocation" x="206" y="38"/>
         </scene>
     </scenes>
     <resources>
+        <image name="errorIcon" width="225" height="196"/>
         <image name="placeIconBlue" width="200" height="200"/>
+        <image name="wahwah" width="200" height="200"/>
     </resources>
 </document>
