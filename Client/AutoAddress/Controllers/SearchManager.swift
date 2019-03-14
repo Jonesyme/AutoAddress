@@ -54,14 +54,10 @@ class SearchManager {
         APIClient.shared().get(DWSEndpoint.search(text: text), responseType: PlaceResponse.self) { result in
             switch result {
             case .error(let error):
-                DispatchQueue.main.async {
-                    self.delegate?.networkErrorOccured(desc: error.localizedDescription)
-                }
+                self.delegate?.networkErrorOccured(desc: error.localizedDescription)
             case .result(let placeResponse):
                 self.resultList = placeResponse.list
-                DispatchQueue.main.async {
-                    self.delegate?.newSearchResultsAvailable(results: self.resultList)
-                }
+                self.delegate?.newSearchResultsAvailable(results: self.resultList)
             }
             self.fetchInProgress = false
         }

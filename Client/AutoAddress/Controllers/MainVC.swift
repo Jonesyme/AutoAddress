@@ -135,13 +135,9 @@ extension MainVC: SearchModalDelegate {
         APIClient.shared().get(DWSEndpoint.details(placeID: place.place_id), responseType: PlaceDetailResponse.self) { result in
             switch result {
             case .error(let error):
-                DispatchQueue.main.async {
-                    print("Error fetching place details from API: " + error.localizedDescription)
-                }
+                print("Error fetching place details from API: " + error.localizedDescription)
             case .result(let detailResponse):
-                DispatchQueue.main.async {
-                    self.addMarkerForPlace(place, detailResponse: detailResponse)
-                }
+                self.addMarkerForPlace(place, detailResponse: detailResponse)
             }
         }
     }
