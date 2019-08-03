@@ -1,8 +1,6 @@
 # AutoAddress
 
-Ambulnz iOS Coding Challenge
-<br />
-**Submitted**: March 13, 2019
+iOS Coding Challenge
 <br />
 **Author**: Mike Jones
 
