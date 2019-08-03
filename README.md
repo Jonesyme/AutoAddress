@@ -1,5 +1,12 @@
 # AutoAddress
-**Summary:** Create an app that allows the user to search for an address.  Use Google's auto-completion API to make address selection easier.  For extra credit: 1) display the address on a map 2) allow the user to select two address and map the route between them <br />
+**Summary:** Create an app that allows the user to search for an address.  Use Google's auto-completion API to make address selection easier.  <br />
+**For extra credit: **<br />
+<ol>
+  <li>display the address on a map</li>
+  <li>allow the selection of a starting address and a destination address</li>
+  <li>map a drivable route between the two addresses</li>
+  <li>create a server-side API to wrap Google's endpoints</li>
+</ol>
 **Purpose:** Code Challenge<br />
 **Author**: Mike Jones
 
