@@ -1,5 +1,5 @@
 # AutoAddress
-**Summary:** Create an app that allows the user to search for an address.  Use Google's auto-completion API to make address selection easier.
+**Summary:** Create an app that allows the user to search for an address.  Use Google's auto-completion API to make address selection easier.<br />
 **For extra credit:**
 <ol>
   <li>display the address on a map</li>
