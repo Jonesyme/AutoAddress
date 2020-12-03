@@ -16,8 +16,8 @@
 ## Solution
 
 
-### Server ###
-- **Path**: Server/
+### Server (PHP) ###
+- **Path**: [Server/](Server/)
 - **Language**: PHP
 - **Description**: <br />
 A bare-bones web-service that basically wraps the Google Places API and consolidates some of the response data in order to reduce the parsing required by the client. For the purposes of demo'ing the app, the server code is currently hosted on my personal LNMP server at: www.dreamwaresys.com.
@@ -26,8 +26,8 @@ The following three endpoints are implemented:
   - Google GeoLocation Fetch (in order to fetch a selected Place's Latitude/Longitude)
   - Google Places Search (not currently used)
 
-### Client ###
-- **Path**: Client/
+### Client (iOS) ###
+- **Path**: [Client/](Client/)
 - **Language**: Swift 4
 - **Compiler**: XCode 10.1
 - **Target**: Universal (iPhone + iPad)
