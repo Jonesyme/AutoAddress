@@ -1,30 +1,28 @@
 # AutoAddress
 
-## Challenge
-Create an app that allows the user to search for an address.  Use Google's auto-completion API to make address selection easier.
+### Code Challenge: ###
+> Create an app that allows the user to search for an address.  Use Google's auto-completion API to make address selection easier.
+> 
+> **For extra credit:**
+> <ol>
+>   <li>display the address on the map</li>
+>   <li>allow the selection of a starting address and a destination address</li>
+>   <li>map a drivable route between the two addresses</li>
+>   <li>create a server-side API to wrap Google's endpoints</li>
+> </ol> <br />
 
-**For extra credit:**
-<ol>
-  <li>display the address on the map</li>
-  <li>allow the selection of a starting address and a destination address</li>
-  <li>map a drivable route between the two addresses</li>
-  <li>create a server-side API to wrap Google's endpoints</li>
-</ol> 
-
-**Purpose:** Code Challenge <br />
-**Author:** Mike Jones <br /><br />
-
-## Solution Parts
+## Solution
+**Author:** Mike Jones<br />
+**Date:** Mar 13, 2019<br />
 
 ### Server
-**Path:** Server/<br />
-**Language:** PHP<br /><br />
-**Description:** <br />
-A bare-bones web-service that basically wraps the Google Places API and consolidates some of the response data in order to reduce the parsing required by the client. For the purposes of demo'ing the app, the server code is currently hosted on my personal LNMP server at: www.dreamwaresys.com.
+* **Path:** Server/<br />
+* **Language:** PHP<br />
+* **Description:** <br />A bare-bones web-service that basically wraps the Google Places API and consolidates some of the response data in order to reduce the parsing required by the client. For the purposes of demo'ing the app, the server code is currently hosted on my personal LNMP server at: www.dreamwaresys.com.
 The following three endpoints are implemented:
-1. Google Places Auto-completion`
-2. Google GeoLocation Fetch (in order to fetch a selected Place's Latitude/Longitude)
-3. Google Places Search (not currently used)
+  - Google Places Auto-completion
+  - Google GeoLocation Fetch (in order to fetch a selected Place's Latitude/Longitude)
+  - Google Places Search (not currently used)
 
 ### Client
 **Path:** Client/<br />
